@@ -199,7 +199,7 @@ class TrainingJobAnalytics(AnalyticsMetricsBase):
     """Fetch training curve data from CloudWatch Metrics for a specific training job.
     """
 
-    CLOUDWATCH_NAMESPACE = '/aws/sagemaker/TrainingJobs'
+    CLOUDWATCH_NAMESPACE = '/aws/sagemaker/HyperParameterTuningJobs'
 
     def __init__(self, training_job_name, metric_names=None, sagemaker_session=None):
         """Initialize a ``TrainingJobAnalytics`` instance.
@@ -214,7 +214,7 @@ class TrainingJobAnalytics(AnalyticsMetricsBase):
         """
         sagemaker_session = sagemaker_session or Session()
         self._sage_client = sagemaker_session.sagemaker_client
-        self._cloudwatch = sagemaker_session.boto_session.client('cloudwatch', "us-west-2")
+        self._cloudwatch = sagemaker_session.boto_session.client('cloudwatch')
         self._training_job_name = training_job_name
         if metric_names:
             self._metric_names = metric_names
